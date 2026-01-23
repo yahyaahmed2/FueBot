@@ -20,7 +20,7 @@ Prerequisites
 -Git
 
 ### 1. Clone the Repo (One-Time)
-git clone https://github.com/https://github.com/yahyaahmed2/FueBot.git
+git clone https://github.com/yahyaahmed2/FueBot.git
 
 cd FueBot
 
