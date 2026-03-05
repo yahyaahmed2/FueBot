@@ -14,6 +14,9 @@ pool.on('error', (err, client) => {
   console.error('Idle client error', err.message, err.stack);
 });
 
+if(!process.env.SESSION_SECRET){
+  throw new Error("Session secret not found in Environment variables")
+};
 const sessionConfig = session({
   secret: process.env.SESSION_SECRET,
   resave: false,
