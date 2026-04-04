@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 {
   "name": "fuebot-backend",
   "version": "1.0.0",
@@ -26,3 +27,33 @@
     "@types/node": "^20.0.0"
   }
 }
+=======
+{
+  "name": "fuebot",
+  "version": "1.0.0",
+  "description": "AI academic advisor chatbot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yahyaahmed2/FueBot.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yahyaahmed2/FueBot/issues"
+  },
+  "homepage": "https://github.com/yahyaahmed2/FueBot#readme",
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "body-parser": "^2.2.2",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.3.1",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0"
+  }
+}
+>>>>>>> yahya-signup
