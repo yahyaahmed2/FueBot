@@ -1,6 +1,6 @@
 require('dotenv').config();
 const express = require('express');
-const sessionMiddleware = require('./config/session');
+const sessionMiddleware = require('./config/config');
 const authRoutes = require('./routes/authRoutes');
 
 const app = express();
