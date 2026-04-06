@@ -1,6 +1,10 @@
 const session = require('express-session');
 const { Pool } = require('pg'); 
-require('dotenv').config();    
+const path = require('path');
+
+require('dotenv').config({
+  path: path.resolve(__dirname, '../../.env')
+});
 
 const pool = new Pool({
   user: process.env.PGUSER,

@@ -3,7 +3,7 @@ const db = require('../config/config');
 const bcrypt = require('bcryptjs');
 
 exports.register = async (req, res) => {
-  try {/
+  try {
     const { firstName, lastName, email, password, major, gpa } = req.body;
 
     // Input validation
