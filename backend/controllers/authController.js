@@ -1,4 +1,4 @@
-const { findUserByEmail, verifyPassword } = require('../models/userModel');
+const { findUserByEmailWithPassword, verifyPassword, findUserByEmail } = require('../models/userModel');
 const db = require('../config/config');
 const bcrypt = require('bcryptjs');
 
@@ -16,7 +16,7 @@ exports.register = async (req, res) => {
     }
 
     // Check if user already exists
-    const existingUser = await findUserByEmail(email);
+    const existingUser = await findUserByEmailWithPassword(email);
     if (existingUser) {
       return res.status(409).json({ message: 'User with this email already exists' });
     }
@@ -51,7 +51,7 @@ exports.login = async (req, res) => {
     }
 
     // Find user by email
-    const user = await findUserByEmail(email);
+    const user = await findUserByEmailWithPassword(email);
     if (!user) {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -62,18 +62,19 @@ exports.login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
+    const sessionUser = await findUserByEmail(email);
     // Set session
-    req.session.userId = user.student_id;
-    req.session.userEmail = user.email;
-    req.session.userName = `${user.first_name} ${user.last_name}`;
+    req.session.userId = sessionUser.student_id;
+    req.session.userEmail = sessionUser.email;
+    req.session.userName = `${sessionUser.first_name} ${sessionUser.last_name}`;
 
     res.json({
       message: 'Logged in successfully',
       user: {
-        id: user.student_id,
-        email: user.email,
-        name: `${user.first_name} ${user.last_name}`,
-        major: user.major
+        id: sessionUser.student_id,
+        email: sessionUser.email,
+        name: `${sessionUser.first_name} ${sessionUser.last_name}`,
+        major: sessionUser.major
       }
     });
   } catch (error) {
