@@ -83,6 +83,48 @@ exports.login = async (req, res) => {
   }
 };
 
+exports.changePassword = async (req, res) => {
+  try {
+    const { email, oldPassword, newPassword } = req.body;
+
+    // Input validation
+    if (!email || !oldPassword || !newPassword) {
+      return res.status(400).json({ message: 'Email, old password, and new password are required' });
+    }
+
+    if (newPassword.length < 6) {
+      return res.status(400).json({ message: 'New password must be at least 6 characters' });
+    }
+
+    // Find user with password
+    const user = await findUserByEmailWithPassword(email);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Verify old password
+    const isMatch = await verifyPassword(oldPassword, user.password);
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Old password is incorrect' });
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update in DB
+    await db.query(
+      'UPDATE student SET password = $1 WHERE email = $2',
+      [hashedPassword, email]
+    );
+
+    res.json({ message: 'Password changed successfully' });
+
+  } catch (error) {
+    console.error('Change password error:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
 exports.logout = (req, res) => {
   req.session.destroy((err) => {
     if (err) {
