@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-require('dotenv').config();
-const express = require('express');
-const sessionMiddleware = require('./config/config').sessionConfig;
-const authRoutes = require('./routes/authRoutes');
-
-const app = express();
-
-app.use(express.json());
-app.use(sessionMiddleware);
-app.use('/auth', authRoutes);
-
-app.listen(process.env.PORT || 5000, () =>
-  console.log('Server running')
-);
-=======
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
@@ -95,8 +79,7 @@ app.use((req, res) => {
 app.use(errorHandler);
 
 // ── Start Server ──────────────────────────────────────────────────
-const PORT = process.env.PORT || 8080;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
   console.log(`🚀 FueBot server running on port ${PORT} [${process.env.NODE_ENV || 'development'}]`);
 });
->>>>>>> e594726 (Re: Seperated frontend, backend, and ai-service into 3 seperate)

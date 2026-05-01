@@ -1,29 +1,3 @@
-<<<<<<< HEAD
-const { findUserByEmail } = require('../models/userModel');
-
-const requireAuth = async (req, res, next) => {
-  try {
-    if (!req.session.userId) {
-      return res.status(401).json({ message: 'Unauthorized - Please log in' });
-    }
-
-    // Optional: Fetch fresh user data from database
-    // This ensures user data is current even if session is old
-    const user = await findUserByEmail(req.session.userEmail);
-    if (!user) {
-      req.session.destroy();
-      return res.status(401).json({ message: 'User not found - Please log in again' });
-    }
-
-    // Attach user to request for easy access in controllers
-    req.user = {
-      id: user.student_id,
-      email: user.email,
-      name: `${user.first_name} ${user.last_name}`,
-      major: user.major,
-      gpa: user.gpa
-    };
-=======
 const db = require('../config/db');
 
 const requireAuth = async (req, res, next) => {
@@ -74,7 +48,6 @@ const requireAuth = async (req, res, next) => {
         role: 'student',
       };
     }
->>>>>>> e594726 (Re: Seperated frontend, backend, and ai-service into 3 seperate)
 
     next();
   } catch (error) {
@@ -83,9 +56,6 @@ const requireAuth = async (req, res, next) => {
   }
 };
 
-<<<<<<< HEAD
-module.exports = requireAuth;
-=======
 /**
  * Restrict access to a specific role.
  * Usage: router.use(requireRole('advisor'))
@@ -99,4 +69,3 @@ const requireRole = (...roles) => (req, res, next) => {
 
 module.exports = requireAuth;
 module.exports.requireRole = requireRole;
->>>>>>> e594726 (Re: Seperated frontend, backend, and ai-service into 3 seperate)

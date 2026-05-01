@@ -2,17 +2,6 @@ const express = require('express');
 const router = express.Router();
 const authController = require('../controllers/authController');
 const requireAuth = require('../middleware/authMiddleware');
-<<<<<<< HEAD
-
-router.post('/register', authController.register);
-router.post('/login', authController.login);
-router.post('/logout', authController.logout);
-router.post('/changePassword', authController.changePassword);
-router.get('/dashboard', requireAuth, authController.dashboard);
-
-
-module.exports = router;
-=======
 const validate = require('../middleware/validate');
 
 router.post('/register', validate({
@@ -56,4 +45,3 @@ router.post('/reset-password', validate({
 }), authController.resetPassword);
 
 module.exports = router;
->>>>>>> e594726 (Re: Seperated frontend, backend, and ai-service into 3 seperate)
