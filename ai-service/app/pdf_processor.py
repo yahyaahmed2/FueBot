@@ -86,8 +86,12 @@ class PDFProcessor:
                 page_num_display = page_num + 1  # 1-based for display
 
                 # Extract text
-                page_text = page.get_text() or ''
-                page_text = _clean_text(page_text)
+                blocks = page.get_text("blocks") or []
+                page_text = "\n".join(
+                       _clean_text(b[4])
+                        for b in blocks
+                            if isinstance(b, (tuple, list)) and len(b) > 4 and b[4].strip()
+                            )
 
                 # Extract tables
                 tables = page.find_tables()
