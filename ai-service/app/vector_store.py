@@ -126,7 +126,7 @@ class ChromaStore:
             self.load()
         return self._store.as_retriever(
             search_type="mmr",
-            search_kwargs={"k": k or settings.retriever_k, "fetch_k": 40},
+            search_kwargs={"k": k or settings.retriever_k, "fetch_k": 6},
         )
 
     @property
