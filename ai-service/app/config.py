@@ -22,7 +22,7 @@ class Settings(BaseSettings):
     chunk_overlap: int = Field(300, env="CHUNK_OVERLAP")
 
     # Retrieval
-    retriever_k: int = Field(10, env="RETRIEVER_K")
+    retriever_k: int = Field(6, env="RETRIEVER_K")
 
     # API
     api_host: str = Field("0.0.0.0", env="API_HOST")
